@@ -4,16 +4,16 @@ import 'package:dcli/dcli.dart';
 
 part 'constants.dart';
 
-/// Class to handle operations.
-class UseTemplate {
+/// Repository class to handle operations.
+class Repository {
   /// Private constructor.
-  UseTemplate._();
+  Repository._();
 
   /// Singleton instance.
-  static final instance = UseTemplate._();
+  static final instance = Repository._();
 
-  /// This method executes all necessary operations.
-  /// Uses the other internal methods in the class.
+  /// Executes all necessary operations.
+  /// Uses other internal methods in the class.
   void exec({
     required String newAppName,
     required String repositoryOfTemplate,

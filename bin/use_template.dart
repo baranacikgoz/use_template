@@ -1,5 +1,5 @@
 import 'package:dcli/dcli.dart';
-import 'package:use_template/use_template.dart';
+import 'package:use_template/repository.dart';
 
 void main(List<String> arguments) {
   late final String _newAppName;
@@ -42,7 +42,7 @@ void main(List<String> arguments) {
   }
 
   // Execute the operations.
-  UseTemplate.instance.exec(
+  Repository.instance.exec(
     newAppName: _newAppName,
     repositoryOfTemplate: _repositoryOfTemplate,
     pathToInstall: _pathToInstall,

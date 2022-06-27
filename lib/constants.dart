@@ -1,4 +1,4 @@
-part of 'use_template.dart';
+part of 'repository.dart';
 
 /// Static class to hold constants.
 class Constants {
@@ -17,7 +17,7 @@ class Constants {
 
   /// Repository of template text.
   static const repoOfTemplateText = 'Enter the git repository of the template. '
-      'Leave empty if you want to use default template: ';
+      'Leave empty if you want to use the default template: ';
 
   /// Path to install text.
   static const pathToInstallText = 'Absolute path to install your app. '
