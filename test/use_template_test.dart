@@ -1,8 +1,8 @@
-import 'package:use_template/use_template.dart';
-import 'package:test/test.dart';
+// import 'package:use_template/use_template.dart';
+// import 'package:test/test.dart';
 
-void main() {
-  test('calculate', () {
-    expect(calculate(), 42);
-  });
-}
+// void main() {
+//   test('calculate', () {
+//     expect(calculate(), 42);
+//   });
+// }
