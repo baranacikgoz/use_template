@@ -5,9 +5,13 @@ class Constants {
   /// Git clone command.
   static const gitClone = 'git clone ';
 
+  // /// Default template.
+  // static const defaultTemplate =
+  //     'https://github.com/baranacikgoz/BloC_repository_pattern_template.git';
+
   /// Default template.
   static const defaultTemplate =
-      'https://github.com/baranacikgoz/BloC_repository_pattern_template.git';
+      'https://github.com/baranacikgoz/use_template_trial_repository.git';
 
   /// Enter new app's name text.
   static const enterAppNameText = 'Enter your new app name: ';

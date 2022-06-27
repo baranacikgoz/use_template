@@ -24,14 +24,11 @@ class Repository {
     // First, create the directory.
     _createDirectory(pathToInstall);
 
-    // Get into the directory.
-    _changeDirectory(pathToInstall);
-
     // Then, clone the repository in it.
-    _cloneRepository(repositoryOfTemplate);
+    _cloneRepository(repositoryOfTemplate, pathToInstall);
 
     // Set oldName
-    _oldName = _getOldName();
+    _oldName = _getOldName(pathToInstall);
   }
 
   void _createDirectory(String path) {
@@ -40,17 +37,13 @@ class Repository {
     }
   }
 
-  void _changeDirectory(String path) {
-    'cd $path'.run;
+  void _cloneRepository(String repository, String path) {
+    'git clone $repository $path'.run;
   }
 
-  void _cloneRepository(String repository) {
-    'git clone $repository'.run;
-  }
+  String _getOldName(String path) {
+    final pubspecFile = File(join(path, 'pubspec.yaml'));
 
-  String _getOldName() {
-    final pubspecFile = find('pubspec.yaml', caseSensitive: true, recursive: false);
-
-    return pubspecFile.firstLine!.split('name: ')[1];
+    return pubspecFile.readAsLinesSync().first.split('name: ').last;
   }
 }
