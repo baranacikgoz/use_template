@@ -4,6 +4,14 @@ import 'package:dcli/dcli.dart';
 
 part 'constants.dart';
 
+/// Extension for capitalizing a string.
+extension StringExtension on String {
+  /// Capitalize the first letter of the string.
+  String capitalize() {
+    return '${this[0].toUpperCase()}${substring(1).toLowerCase()}';
+  }
+}
+
 /// Repository class to handle operations.
 class Repository {
   /// Private constructor.
@@ -30,20 +38,25 @@ class Repository {
     // Set oldName
     _oldName = _getOldName(pathToInstall);
 
-    // Splitted and uppered first char of the name.
-    final List<String> newNameSplittedList = newAppNameSnakeCase.split('_');
-    for (String str in newNameSplittedList) {
-      // Upper first char of string.
-      str = str.substring(0, 1).toUpperCase() + str.substring(1);
-    }
+    // Split and upper first chars of words.
+    List<String> newNameSplittedList = newAppNameSnakeCase.split('_');
 
-    final newNameUpperedFirstChars = newNameSplittedList.join();
+    newNameSplittedList = newNameSplittedList.map((word) => word.capitalize()).toList();
+
+    final newNameUpperedFirstChars = newNameSplittedList.join(' ');
 
     // Change Android name.
     _changeAndroidName(
       path: pathToInstall,
       oldName: _oldName,
       newNameSnakeCase: newAppNameSnakeCase,
+      newNameUpperedFirstChars: newNameUpperedFirstChars,
+    );
+
+    // Change IOS name.
+    _changeIOSName(
+      path: pathToInstall,
+      oldName: _oldName,
       newNameUpperedFirstChars: newNameUpperedFirstChars,
     );
   }
@@ -123,5 +136,31 @@ class Repository {
         // Ignore.
       }
     }
+  }
+
+  // Change the IOS name of the app.
+  void _changeIOSName({
+    required String path,
+    required String oldName,
+    required String newNameUpperedFirstChars,
+  }) {
+    // Check if iOS path exists.
+    if (!Directory(join(path, 'ios')).existsSync()) {
+      printerr(
+        "Couldn't found iOS directory, probably your app doesn't have an iOS project.",
+      );
+      return;
+    }
+
+    final infoPlistFile = File(join(path, 'ios', 'Runner', 'Info.plist'));
+
+    final List<String> lines = infoPlistFile.readAsLinesSync();
+    for (int i = 0; i < lines.length; i++) {
+      if (lines[i].contains('CFBundleDisplayName')) {
+        lines[i + 1] = '<string>$newNameUpperedFirstChars</string>';
+        break;
+      }
+    }
+    infoPlistFile.writeAsStringSync(lines.join('\n'));
   }
 }
