@@ -43,7 +43,7 @@ void main(List<String> arguments) {
 
   // Execute the operations.
   Repository.instance.exec(
-    newAppName: _newAppName,
+    newAppNameSnakeCase: _newAppName,
     repositoryOfTemplate: _repositoryOfTemplate,
     pathToInstall: _pathToInstall,
   );
