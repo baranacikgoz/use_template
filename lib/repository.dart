@@ -68,6 +68,14 @@ class Repository {
       newNameSnakeCase: newAppNameSnakeCase,
       newNameUpperedFirstChars: newNameUpperedFirstChars,
     );
+
+    // Change macos name.
+    _changeMacOSName(
+      path: pathToInstall,
+      oldName: _oldName,
+      newNameSnakeCase: newAppNameSnakeCase,
+      newNameUpperedFirstChars: newNameUpperedFirstChars,
+    );
   }
 
   void _createDirectory(String path) {
@@ -223,7 +231,7 @@ class Repository {
     }
 
     // Read Info.plist and replace name.
-    final infoPlistFile = File(join(path, 'macos', 'Info.plist'));
+    final infoPlistFile = File(join(path, 'macos', 'Runner', 'Info.plist'));
     final List<String> lines = infoPlistFile.readAsLinesSync();
     for (int i = 0; i < lines.length; i++) {
       if (lines[i].contains('CFBundleDisplayName')) {
@@ -235,5 +243,30 @@ class Repository {
       }
     }
     infoPlistFile.writeAsStringSync(lines.join('\n'));
+
+    final List<File> filesToChange = [
+      File(join(path, 'macos', 'Runner', 'Configs', 'AppInfo.xcconfig')),
+      File(join(path, 'macos', 'Runner.xcodeproj', 'project.pbxproj')),
+      File(
+        join(
+          path,
+          'macos',
+          'Runner.xcodeproj',
+          'xcsharreddata',
+          'xcschemes',
+          'Runner.xcscheme',
+        ),
+      ),
+    ];
+
+    for (final file in filesToChange) {
+      try {
+        file.writeAsStringSync(
+          file.readAsStringSync().replaceAll(oldName, newNameSnakeCase),
+        );
+      } catch (e) {
+        // Ignore.
+      }
+    }
   }
 }
