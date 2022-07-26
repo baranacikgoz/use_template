@@ -22,29 +22,29 @@ class UseTemplateBase {
   late final String _oldName;
 
   /// Executes all necessary operations.
-  /// Uses other internal methods inside the class!
+  /// Uses other methods inside!
   void exec({
     required String newAppNameSnakeCase,
     required String repositoryOfTemplate,
     required String pathToInstall,
   }) {
-    // First, create the directory.
+    /// First, create the directory.
     _createDirectory(pathToInstall);
 
-    // Then, clone the repository in it.
+    /// Then, clone the repository in it.
     _cloneRepository(repositoryOfTemplate, pathToInstall);
 
-    // Set oldName
+    /// Set oldName
     _oldName = _getOldName(pathToInstall);
 
-    // Split and upper first chars of words.
+    /// Split and upper first chars of words.
     List<String> newNameSplittedList = newAppNameSnakeCase.split('_');
 
     newNameSplittedList = newNameSplittedList.map((word) => word.capitalize()).toList();
 
     final newNameUpperedFirstChars = newNameSplittedList.join(' ');
 
-    // Change Android name.
+    /// Change Android name.
     changeAndroidName(
       path: pathToInstall,
       oldName: _oldName,
@@ -52,7 +52,7 @@ class UseTemplateBase {
       newNameUpperedFirstChars: newNameUpperedFirstChars,
     );
 
-    // Change IOS name.
+    /// Change IOS name.
     changeIOSName(
       path: pathToInstall,
       oldName: _oldName,
@@ -60,7 +60,7 @@ class UseTemplateBase {
       newNameUpperedFirstChars: newNameUpperedFirstChars,
     );
 
-    // Change Web name.
+    /// Change Web name.
     changeWebName(
       path: pathToInstall,
       oldName: _oldName,
@@ -68,7 +68,7 @@ class UseTemplateBase {
       newNameUpperedFirstChars: newNameUpperedFirstChars,
     );
 
-    // Change linux name.
+    /// Change linux name.
     changeLinuxName(
       path: pathToInstall,
       oldName: _oldName,
@@ -76,7 +76,7 @@ class UseTemplateBase {
       newNameUpperedFirstChars: newNameUpperedFirstChars,
     );
 
-    // Change windows name.
+    /// Change windows name.
     changeWindowsName(
       path: pathToInstall,
       oldName: _oldName,
@@ -84,7 +84,7 @@ class UseTemplateBase {
       newNameUpperedFirstChars: newNameUpperedFirstChars,
     );
 
-    // Change macos name.
+    /// Change macos name.
     changeMacOSName(
       path: pathToInstall,
       oldName: _oldName,
