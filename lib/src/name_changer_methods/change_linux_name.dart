@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:dcli/dcli.dart';
 
+/// Changes Linux name of the project.
 void changeLinuxName({
   required String path,
   required String oldName,

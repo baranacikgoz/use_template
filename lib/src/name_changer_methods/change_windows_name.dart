@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:dcli/dcli.dart';
 
+/// Changes Windows name of the project.
 void changeWindowsName({
   required String path,
   required String oldName,

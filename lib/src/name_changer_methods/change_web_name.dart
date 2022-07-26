@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:dcli/dcli.dart';
 
+/// Changes Web name of the project.
 void changeWebName({
   required String path,
   required String oldName,

@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:dcli/dcli.dart';
 
+/// Changes IOS name of the project.
 void changeIOSName({
   required String path,
   required String oldName,

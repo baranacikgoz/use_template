@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:dcli/dcli.dart';
 
+/// Changes Android name of the project.
 void changeAndroidName({
   required String path,
   required String oldName,

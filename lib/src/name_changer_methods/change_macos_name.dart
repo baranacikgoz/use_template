@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:dcli/dcli.dart';
 
+/// Changes MacOS name of the project.
 void changeMacOSName({
   required String path,
   required String oldName,
