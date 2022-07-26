@@ -34,7 +34,7 @@ class UseTemplateBase {
     /// Then, clone the repository in it.
     _cloneRepository(repositoryOfTemplate, pathToInstall);
 
-    /// Then, remove old git files.
+    /// Then, remove old git files coming with clonned repository.
     _removeOldGitFiles(pathToInstall);
 
     /// Set oldName
