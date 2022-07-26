@@ -1,4 +1,4 @@
-part of 'repository.dart';
+part of '../use_template_base.dart';
 
 /// Static class to hold constants.
 class Constants {
