@@ -46,7 +46,7 @@ class UseTemplateBase {
 
     /// Change Android name.
     changeAndroidName(
-      path: pathToInstall,
+      baseFolderPath: pathToInstall,
       oldName: _oldName,
       newNameSnakeCase: newAppNameSnakeCase,
       newNameUpperedFirstChars: newNameUpperedFirstChars,
@@ -54,7 +54,7 @@ class UseTemplateBase {
 
     /// Change IOS name.
     changeIOSName(
-      path: pathToInstall,
+      baseFolderPath: pathToInstall,
       oldName: _oldName,
       newNameSnakeCase: newAppNameSnakeCase,
       newNameUpperedFirstChars: newNameUpperedFirstChars,
@@ -62,7 +62,7 @@ class UseTemplateBase {
 
     /// Change Web name.
     changeWebName(
-      path: pathToInstall,
+      baseFolderPath: pathToInstall,
       oldName: _oldName,
       newNameSnakeCase: newAppNameSnakeCase,
       newNameUpperedFirstChars: newNameUpperedFirstChars,
@@ -70,7 +70,7 @@ class UseTemplateBase {
 
     /// Change linux name.
     changeLinuxName(
-      path: pathToInstall,
+      baseFolderPath: pathToInstall,
       oldName: _oldName,
       newNameSnakeCase: newAppNameSnakeCase,
       newNameUpperedFirstChars: newNameUpperedFirstChars,
@@ -78,7 +78,7 @@ class UseTemplateBase {
 
     /// Change windows name.
     changeWindowsName(
-      path: pathToInstall,
+      baseFolderPath: pathToInstall,
       oldName: _oldName,
       newNameSnakeCase: newAppNameSnakeCase,
       newNameUpperedFirstChars: newNameUpperedFirstChars,
@@ -86,7 +86,7 @@ class UseTemplateBase {
 
     /// Change macos name.
     changeMacOSName(
-      path: pathToInstall,
+      baseFolderPath: pathToInstall,
       oldName: _oldName,
       newNameSnakeCase: newAppNameSnakeCase,
       newNameUpperedFirstChars: newNameUpperedFirstChars,

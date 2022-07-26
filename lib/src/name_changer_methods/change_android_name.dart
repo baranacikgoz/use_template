@@ -4,20 +4,20 @@ import 'package:dcli/dcli.dart';
 
 /// Changes Android name of the project.
 void changeAndroidName({
-  required String path,
+  required String baseFolderPath,
   required String oldName,
   required String newNameSnakeCase,
   required String newNameUpperedFirstChars,
 }) {
   // Check if Android path exists.
-  if (!Directory(join(path, 'android')).existsSync()) {
+  if (!Directory(join(baseFolderPath, 'android')).existsSync()) {
     printerr(
       "Couldn't found Andorid directory, probably your app doesn't have an Android project.",
     );
     return;
   }
 
-  final _basePath = join(path, 'android', 'app');
+  final _basePath = join(baseFolderPath, 'android', 'app');
 
   // ! Fix it
   // // Read AndroidManifest.xml and check if it has 'android:label' attribute.
