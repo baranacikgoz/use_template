@@ -34,6 +34,9 @@ class UseTemplateBase {
     /// Then, clone the repository in it.
     _cloneRepository(repositoryOfTemplate, pathToInstall);
 
+    /// Then, remove old git files.
+    _removeOldGitFiles(pathToInstall);
+
     /// Set oldName
     _oldName = _getOldName(pathToInstall);
 
@@ -101,6 +104,13 @@ class UseTemplateBase {
 
   void _cloneRepository(String repository, String path) {
     'git clone $repository $path'.run;
+  }
+
+  void _removeOldGitFiles(String baseFolderPath) {
+    final gitFolder = Directory(join(baseFolderPath, '.git'));
+    if (gitFolder.existsSync()) {
+      gitFolder.deleteSync(recursive: true);
+    }
   }
 
   String _getOldName(String path) {
