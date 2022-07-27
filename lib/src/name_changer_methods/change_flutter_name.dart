@@ -25,7 +25,7 @@ void changeLibImportNames({
   required String newNameUpperedFirstChars,
 }) {
   final libFolder = Directory(join(baseFolderPath, 'lib'));
-  final libFiles = libFolder.listSync();
+  final libFiles = libFolder.listSync(recursive: true);
 
   for (final file in libFiles) {
     if (file is File) {

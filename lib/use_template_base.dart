@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:dcli/dcli.dart';
 import 'package:use_template/src/extensions.dart';
 import 'package:use_template/src/name_changer_methods/change_android_name.dart';
+import 'package:use_template/src/name_changer_methods/change_flutter_name.dart';
 import 'package:use_template/src/name_changer_methods/change_ios_name.dart';
 import 'package:use_template/src/name_changer_methods/change_linux_name.dart';
 import 'package:use_template/src/name_changer_methods/change_macos_name.dart';
@@ -89,6 +90,22 @@ class UseTemplateBase {
 
     /// Change macos name.
     changeMacOSName(
+      baseFolderPath: pathToInstall,
+      oldName: _oldName,
+      newNameSnakeCase: newAppNameSnakeCase,
+      newNameUpperedFirstChars: newNameUpperedFirstChars,
+    );
+
+    /// Change pubspec name.
+    changePubspecName(
+      baseFolderPath: pathToInstall,
+      oldName: _oldName,
+      newNameSnakeCase: newAppNameSnakeCase,
+      newNameUpperedFirstChars: newNameUpperedFirstChars,
+    );
+
+    /// Change lib import names.
+    changeLibImportNames(
       baseFolderPath: pathToInstall,
       oldName: _oldName,
       newNameSnakeCase: newAppNameSnakeCase,
