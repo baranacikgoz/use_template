@@ -9,14 +9,6 @@ void changeWebName({
   required String newNameSnakeCase,
   required String newNameUpperedFirstChars,
 }) {
-  // Check if web path exists.
-  if (!Directory(join(baseFolderPath, 'web')).existsSync()) {
-    printerr(
-      "Couldn't found web directory, probably your app doesn't have a web project.",
-    );
-    return;
-  }
-
   final webIndexFile = File(join(baseFolderPath, 'web', 'index.html'));
   final webIndexContent = webIndexFile.readAsStringSync();
 

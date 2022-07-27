@@ -2,9 +2,6 @@ part of '../use_template_base.dart';
 
 /// Static class to hold constants.
 class Constants {
-  /// Git clone command.
-  static const gitClone = 'git clone ';
-
   // /// Default template.
   // static const defaultTemplate =
   //     'https://github.com/baranacikgoz/BloC_repository_pattern_template.git';

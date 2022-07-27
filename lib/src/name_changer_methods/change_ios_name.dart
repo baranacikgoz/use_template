@@ -9,14 +9,6 @@ void changeIOSName({
   required String newNameSnakeCase,
   required String newNameUpperedFirstChars,
 }) {
-  // Check if iOS path exists.
-  if (!Directory(join(baseFolderPath, 'ios')).existsSync()) {
-    printerr(
-      "Couldn't found iOS directory, probably your app doesn't have an iOS project.",
-    );
-    return;
-  }
-
   final infoPlistFile = File(join(baseFolderPath, 'ios', 'Runner', 'Info.plist'));
 
   final List<String> lines = infoPlistFile.readAsLinesSync();

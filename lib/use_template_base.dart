@@ -29,88 +29,199 @@ class UseTemplateBase {
     required String repositoryOfTemplate,
     required String pathToInstall,
   }) {
-    /// First, create the directory.
-    _createDirectory(pathToInstall);
+    /* Crating directory and clonning operations. */
+    try {
+      // First, create the directory.
+      _createDirectory(pathToInstall);
+    } catch (e) {
+      printerr('Could not create directory to clone repository! : $e');
+      // Abort.
+      return;
+    }
 
-    /// Then, clone the repository in it.
-    _cloneRepository(repositoryOfTemplate, pathToInstall);
+    try {
+      // Then, clone the repository in it.
+      _cloneRepository(repositoryOfTemplate, pathToInstall);
+    } catch (e) {
+      printerr('Could not clone repository! : $e');
+      // Abort.
+      return;
+    }
 
-    /// Then, remove old git files coming with clonned repository.
-    _removeOldGitFiles(pathToInstall);
-
-    /// Set oldName
-    _oldName = _getOldName(pathToInstall);
-
-    /// Split and upper first chars of words.
+    /* Getting old name from pubspec and necessary name of the project. */
+    try {
+      // Set oldName
+      _oldName = _getOldName(pathToInstall);
+    } catch (e) {
+      printerr('Could not get the old name from pubspec! : $e');
+      // Abort.
+      return;
+    }
+    // Split and upper first chars of words.
     List<String> newNameSplittedList = newAppNameSnakeCase.split('_');
-
     newNameSplittedList = newNameSplittedList.map((word) => word.capitalize()).toList();
-
     final newNameUpperedFirstChars = newNameSplittedList.join(' ');
 
-    /// Change Android name.
-    changeAndroidName(
-      baseFolderPath: pathToInstall,
-      oldName: _oldName,
-      newNameSnakeCase: newAppNameSnakeCase,
-      newNameUpperedFirstChars: newNameUpperedFirstChars,
-    );
+    /* Changing different platform names. */
 
-    /// Change IOS name.
-    changeIOSName(
-      baseFolderPath: pathToInstall,
-      oldName: _oldName,
-      newNameSnakeCase: newAppNameSnakeCase,
-      newNameUpperedFirstChars: newNameUpperedFirstChars,
-    );
+    // If Android path does not exists, do not try to change Android name.
+    if (!Directory(join(pathToInstall, 'android')).existsSync()) {
+      printerr(
+        "Couldn't found Android directory, probably your app doesn't have an Android project.",
+      );
+    } else {
+      try {
+        // Change Android name.
+        changeAndroidName(
+          baseFolderPath: pathToInstall,
+          oldName: _oldName,
+          newNameSnakeCase: newAppNameSnakeCase,
+          newNameUpperedFirstChars: newNameUpperedFirstChars,
+        );
+      } catch (e) {
+        printerr('Could not change Android name : $e');
+      }
+    }
 
-    /// Change Web name.
-    changeWebName(
-      baseFolderPath: pathToInstall,
-      oldName: _oldName,
-      newNameSnakeCase: newAppNameSnakeCase,
-      newNameUpperedFirstChars: newNameUpperedFirstChars,
-    );
+    // If iOS path does not exists, do not try to change IOS name.
+    if (!Directory(join(pathToInstall, 'ios')).existsSync()) {
+      printerr(
+        "Couldn't found iOS directory, probably your app doesn't have an iOS project.",
+      );
+    } else {
+      try {
+        // Change iOS name.
+        changeIOSName(
+          baseFolderPath: pathToInstall,
+          oldName: _oldName,
+          newNameSnakeCase: newAppNameSnakeCase,
+          newNameUpperedFirstChars: newNameUpperedFirstChars,
+        );
+      } catch (e) {
+        printerr('Could not change iOS name : $e');
+      }
+    }
 
-    /// Change linux name.
-    changeLinuxName(
-      baseFolderPath: pathToInstall,
-      oldName: _oldName,
-      newNameSnakeCase: newAppNameSnakeCase,
-      newNameUpperedFirstChars: newNameUpperedFirstChars,
-    );
+    // If Web path does not exists, do not try to change Web name.
+    if (!Directory(join(pathToInstall, 'web')).existsSync()) {
+      printerr(
+        "Couldn't found web directory, probably your app doesn't have a web project.",
+      );
+    } else {
+      try {
+        // Change web name.
+        changeWebName(
+          baseFolderPath: pathToInstall,
+          oldName: _oldName,
+          newNameSnakeCase: newAppNameSnakeCase,
+          newNameUpperedFirstChars: newNameUpperedFirstChars,
+        );
+      } catch (e) {
+        printerr('Could not change web name : $e');
+      }
+    }
 
-    /// Change windows name.
-    changeWindowsName(
-      baseFolderPath: pathToInstall,
-      oldName: _oldName,
-      newNameSnakeCase: newAppNameSnakeCase,
-      newNameUpperedFirstChars: newNameUpperedFirstChars,
-    );
+    // If Linux path does not exists, do not try to change Linux name.
+    if (!Directory(join(pathToInstall, 'linux')).existsSync()) {
+      printerr(
+        "Couldn't found Linux directory, probably your app doesn't have a Linux project.",
+      );
+    } else {
+      try {
+        // Change Linux name.
+        changeLinuxName(
+          baseFolderPath: pathToInstall,
+          oldName: _oldName,
+          newNameSnakeCase: newAppNameSnakeCase,
+          newNameUpperedFirstChars: newNameUpperedFirstChars,
+        );
+      } catch (e) {
+        printerr('Could not change Linux name : $e');
+      }
+    }
 
-    /// Change macos name.
-    changeMacOSName(
-      baseFolderPath: pathToInstall,
-      oldName: _oldName,
-      newNameSnakeCase: newAppNameSnakeCase,
-      newNameUpperedFirstChars: newNameUpperedFirstChars,
-    );
+    // If MacOS path does not exists, do not try to change MacOS name.
+    if (!Directory(join(pathToInstall, 'macos')).existsSync()) {
+      printerr(
+        "Couldn't found MacOS directory, probably your app doesn't have a MacOS project.",
+      );
+    } else {
+      try {
+        // Change MacOS name.
+        changeMacOSName(
+          baseFolderPath: pathToInstall,
+          oldName: _oldName,
+          newNameSnakeCase: newAppNameSnakeCase,
+          newNameUpperedFirstChars: newNameUpperedFirstChars,
+        );
+      } catch (e) {
+        printerr('Could not change MacOS name : $e');
+      }
+    }
 
-    /// Change pubspec name.
-    changePubspecName(
-      baseFolderPath: pathToInstall,
-      oldName: _oldName,
-      newNameSnakeCase: newAppNameSnakeCase,
-      newNameUpperedFirstChars: newNameUpperedFirstChars,
-    );
+    // If Windows path does not exists, do not try to change Windows name.
+    if (!Directory(join(pathToInstall, 'windows')).existsSync()) {
+      printerr(
+        "Couldn't found Windows directory, probably your app doesn't have a Windows project.",
+      );
+    } else {
+      try {
+        // Change Windows name.
+        changeWindowsName(
+          baseFolderPath: pathToInstall,
+          oldName: _oldName,
+          newNameSnakeCase: newAppNameSnakeCase,
+          newNameUpperedFirstChars: newNameUpperedFirstChars,
+        );
+      } catch (e) {
+        printerr('Could not change Windows name : $e');
+      }
+    }
 
-    /// Change lib import names.
-    changeLibImportNames(
-      baseFolderPath: pathToInstall,
-      oldName: _oldName,
-      newNameSnakeCase: newAppNameSnakeCase,
-      newNameUpperedFirstChars: newNameUpperedFirstChars,
-    );
+    /* Final operations */
+    try {
+      // Change pubspec name.
+      changePubspecName(
+        baseFolderPath: pathToInstall,
+        oldName: _oldName,
+        newNameSnakeCase: newAppNameSnakeCase,
+        newNameUpperedFirstChars: newNameUpperedFirstChars,
+      );
+    } catch (e) {
+      printerr('Could not change pubspec name, you have to change manually! : $e');
+    }
+
+    try {
+      // Change lib import names.
+      changeLibImports(
+        baseFolderPath: pathToInstall,
+        oldName: _oldName,
+        newNameSnakeCase: newAppNameSnakeCase,
+        newNameUpperedFirstChars: newNameUpperedFirstChars,
+      );
+    } catch (e) {
+      printerr('Could not change lib imports, you have to change manually! : $e');
+    }
+
+    try {
+      // Change test import names.
+      changeTestImports(
+        baseFolderPath: pathToInstall,
+        oldName: _oldName,
+        newNameSnakeCase: newAppNameSnakeCase,
+        newNameUpperedFirstChars: newNameUpperedFirstChars,
+      );
+    } catch (e) {
+      printerr('Could not change test imports, you have to change manually! : $e');
+    }
+
+    try {
+      /// Remove old git files coming with clonned repository.
+      _removeOldGitFiles(pathToInstall);
+    } catch (e) {
+      printerr('Could not remove old git files, you have to remove manually! : $e');
+      // Didn't use return. Because it's not a critical error.
+    }
   }
 
   void _createDirectory(String path) {
@@ -133,6 +244,16 @@ class UseTemplateBase {
   String _getOldName(String path) {
     final pubspecFile = File(join(path, 'pubspec.yaml'));
 
-    return pubspecFile.readAsLinesSync().first.split('name: ').last;
+    late final String oldName;
+    final linesOfPubspec = pubspecFile.readAsLinesSync();
+
+    for (final line in linesOfPubspec) {
+      if (line.startsWith('name')) {
+        oldName = line.split('name: ').last;
+        break;
+      }
+    }
+
+    return oldName;
   }
 }

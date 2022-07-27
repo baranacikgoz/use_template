@@ -9,14 +9,6 @@ void changeAndroidName({
   required String newNameSnakeCase,
   required String newNameUpperedFirstChars,
 }) {
-  // Check if Android path exists.
-  if (!Directory(join(baseFolderPath, 'android')).existsSync()) {
-    printerr(
-      "Couldn't found Andorid directory, probably your app doesn't have an Android project.",
-    );
-    return;
-  }
-
   final _basePath = join(baseFolderPath, 'android', 'app');
 
   // ! Fix it
