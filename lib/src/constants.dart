@@ -24,24 +24,31 @@ class ConstStrings {
   static const pathToInstallText = 'Absolute path to install your app. '
       'The default is the current path if you leave empty: ';
 
+  /// Couldn't create directory text.
   static const couldntCreateDirectory = 'Could not create directory to clone repository!';
 
+  /// Couldn't clone repository text.
   static const couldntCloneRepository = 'Could not clone repository!';
 
+  /// Couldn't get old name text.
   static const couldntGetOldName = 'Could not get old name from pubspec.yaml!';
 
+  /// Couldn't find directory text.
   static String couldntFindDir(String dirName) {
     return "Couldn't found $dirName directory, probably your app doesn't have a $dirName project.";
   }
 
+  /// Couldn't change name text.
   static String couldntChangeName(String platformName) {
     return 'Could not change $platformName name, you have to change manually!';
   }
 
-  static String couldntChangeImports(String platformName) {
-    return 'Could not change $platformName imports, you have to change manually!';
+  /// Couldn't change imports text.
+  static String couldntChangeImports(String folderName) {
+    return 'Could not change $folderName imports, you have to change manually!';
   }
 
+  /// Couldn't remove old git files text.
   static String couldntRemoveOldGit =
       'Could not remove old git files, you have to remove manually!';
 }
