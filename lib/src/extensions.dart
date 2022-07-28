@@ -1,3 +1,5 @@
+part of '../use_template_base.dart';
+
 /// Extension for capitalizing a string.
 extension StringCapitalizationExtension on String {
   /// Capitalize the first letter of the string.

@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:dcli/dcli.dart';
-import 'package:use_template/src/extensions.dart';
 import 'package:use_template/src/name_changer_methods/change_android_name.dart';
 import 'package:use_template/src/name_changer_methods/change_flutter_name.dart';
 import 'package:use_template/src/name_changer_methods/change_ios_name.dart';
@@ -11,6 +10,7 @@ import 'package:use_template/src/name_changer_methods/change_web_name.dart';
 import 'package:use_template/src/name_changer_methods/change_windows_name.dart';
 
 part 'src/constants.dart';
+part 'src/extensions.dart';
 
 /// Repository class to handle operations.
 class UseTemplateBase {
