@@ -34,7 +34,7 @@ class UseTemplateBase {
       // First, create the directory.
       _createDirectory(pathToInstall);
     } catch (e) {
-      printerr('Could not create directory to clone repository! : $e');
+      printerr('${ConstStrings.couldntCreateDirectory} : $e');
       // Abort.
       return;
     }
@@ -43,7 +43,7 @@ class UseTemplateBase {
       // Then, clone the repository in it.
       _cloneRepository(repositoryOfTemplate, pathToInstall);
     } catch (e) {
-      printerr('Could not clone repository! : $e');
+      printerr('${ConstStrings.couldntCloneRepository} : $e');
       // Abort.
       return;
     }
@@ -53,7 +53,7 @@ class UseTemplateBase {
       // Set oldName
       _oldName = _getOldName(pathToInstall);
     } catch (e) {
-      printerr('Could not get the old name from pubspec! : $e');
+      printerr('${ConstStrings.couldntGetOldName} : $e');
       // Abort.
       return;
     }
@@ -67,7 +67,7 @@ class UseTemplateBase {
     // If Android path does not exists, do not try to change Android name.
     if (!Directory(join(pathToInstall, 'android')).existsSync()) {
       printerr(
-        "Couldn't found Android directory, probably your app doesn't have an Android project.",
+        ConstStrings.couldntFindDir('Android'),
       );
     } else {
       try {
@@ -79,14 +79,15 @@ class UseTemplateBase {
           newNameUpperedFirstChars: newNameUpperedFirstChars,
         );
       } catch (e) {
-        printerr('Could not change Android name : $e');
+        final errorMessage = ConstStrings.couldntChangeName('Android');
+        printerr('$errorMessage : $e');
       }
     }
 
     // If iOS path does not exists, do not try to change IOS name.
     if (!Directory(join(pathToInstall, 'ios')).existsSync()) {
       printerr(
-        "Couldn't found iOS directory, probably your app doesn't have an iOS project.",
+        ConstStrings.couldntFindDir('IOS'),
       );
     } else {
       try {
@@ -98,14 +99,15 @@ class UseTemplateBase {
           newNameUpperedFirstChars: newNameUpperedFirstChars,
         );
       } catch (e) {
-        printerr('Could not change iOS name : $e');
+        final errorMessage = ConstStrings.couldntChangeName('IOS');
+        printerr('$errorMessage : $e');
       }
     }
 
     // If Web path does not exists, do not try to change Web name.
     if (!Directory(join(pathToInstall, 'web')).existsSync()) {
       printerr(
-        "Couldn't found web directory, probably your app doesn't have a web project.",
+        ConstStrings.couldntFindDir('Web'),
       );
     } else {
       try {
@@ -117,14 +119,15 @@ class UseTemplateBase {
           newNameUpperedFirstChars: newNameUpperedFirstChars,
         );
       } catch (e) {
-        printerr('Could not change web name : $e');
+        final errorMessage = ConstStrings.couldntChangeName('Web');
+        printerr('$errorMessage : $e');
       }
     }
 
     // If Linux path does not exists, do not try to change Linux name.
     if (!Directory(join(pathToInstall, 'linux')).existsSync()) {
       printerr(
-        "Couldn't found Linux directory, probably your app doesn't have a Linux project.",
+        ConstStrings.couldntFindDir('Linux'),
       );
     } else {
       try {
@@ -136,14 +139,15 @@ class UseTemplateBase {
           newNameUpperedFirstChars: newNameUpperedFirstChars,
         );
       } catch (e) {
-        printerr('Could not change Linux name : $e');
+        final errorMessage = ConstStrings.couldntChangeName('Linux');
+        printerr('$errorMessage : $e');
       }
     }
 
     // If MacOS path does not exists, do not try to change MacOS name.
     if (!Directory(join(pathToInstall, 'macos')).existsSync()) {
       printerr(
-        "Couldn't found MacOS directory, probably your app doesn't have a MacOS project.",
+        ConstStrings.couldntFindDir('MacOS'),
       );
     } else {
       try {
@@ -155,14 +159,15 @@ class UseTemplateBase {
           newNameUpperedFirstChars: newNameUpperedFirstChars,
         );
       } catch (e) {
-        printerr('Could not change MacOS name : $e');
+        final errorMessage = ConstStrings.couldntChangeName('MacOS');
+        printerr('$errorMessage : $e');
       }
     }
 
     // If Windows path does not exists, do not try to change Windows name.
     if (!Directory(join(pathToInstall, 'windows')).existsSync()) {
       printerr(
-        "Couldn't found Windows directory, probably your app doesn't have a Windows project.",
+        ConstStrings.couldntFindDir('Windows'),
       );
     } else {
       try {
@@ -174,7 +179,8 @@ class UseTemplateBase {
           newNameUpperedFirstChars: newNameUpperedFirstChars,
         );
       } catch (e) {
-        printerr('Could not change Windows name : $e');
+        final errorMessage = ConstStrings.couldntChangeName('Windows');
+        printerr('$errorMessage : $e');
       }
     }
 
@@ -188,7 +194,8 @@ class UseTemplateBase {
         newNameUpperedFirstChars: newNameUpperedFirstChars,
       );
     } catch (e) {
-      printerr('Could not change pubspec name, you have to change manually! : $e');
+      final errorMessage = ConstStrings.couldntChangeName('pubspec');
+      printerr('$errorMessage : $e');
     }
 
     try {
@@ -200,7 +207,8 @@ class UseTemplateBase {
         newNameUpperedFirstChars: newNameUpperedFirstChars,
       );
     } catch (e) {
-      printerr('Could not change lib imports, you have to change manually! : $e');
+      final errorMessage = ConstStrings.couldntChangeImports('lib');
+      printerr('$errorMessage : $e');
     }
 
     try {
@@ -212,14 +220,15 @@ class UseTemplateBase {
         newNameUpperedFirstChars: newNameUpperedFirstChars,
       );
     } catch (e) {
-      printerr('Could not change test imports, you have to change manually! : $e');
+      final errorMessage = ConstStrings.couldntChangeImports('test');
+      printerr('$errorMessage : $e');
     }
 
     try {
       /// Remove old git files coming with clonned repository.
       _removeOldGitFiles(pathToInstall);
     } catch (e) {
-      printerr('Could not remove old git files, you have to remove manually! : $e');
+      printerr('${ConstStrings.couldntRemoveOldGit} : $e');
       // Didn't use return. Because it's not a critical error.
     }
   }

@@ -1,7 +1,7 @@
 part of '../use_template_base.dart';
 
 /// Static class to hold constants.
-class Constants {
+class ConstStrings {
   // /// Default template.
   // static const defaultTemplate =
   //     'https://github.com/baranacikgoz/BloC_repository_pattern_template.git';
@@ -23,4 +23,25 @@ class Constants {
   /// Path to install text.
   static const pathToInstallText = 'Absolute path to install your app. '
       'The default is the current path if you leave empty: ';
+
+  static const couldntCreateDirectory = 'Could not create directory to clone repository!';
+
+  static const couldntCloneRepository = 'Could not clone repository!';
+
+  static const couldntGetOldName = 'Could not get old name from pubspec.yaml!';
+
+  static String couldntFindDir(String dirName) {
+    return "Couldn't found $dirName directory, probably your app doesn't have a $dirName project.";
+  }
+
+  static String couldntChangeName(String platformName) {
+    return 'Could not change $platformName name, you have to change manually!';
+  }
+
+  static String couldntChangeImports(String platformName) {
+    return 'Could not change $platformName imports, you have to change manually!';
+  }
+
+  static String couldntRemoveOldGit =
+      'Could not remove old git files, you have to remove manually!';
 }

@@ -11,26 +11,26 @@ void main(List<String> arguments) {
   /// Arguments is empty therefore user will use interactive interface.
   if (arguments.isEmpty) {
     _newAppName = ask(
-      Constants.enterAppNameText,
+      ConstStrings.enterAppNameText,
       validator: Ask.regExp(
         r'^[a-z_]+$',
-        error: Constants.mustPassSnackCaseName,
+        error: ConstStrings.mustPassSnackCaseName,
       ),
     );
 
     final _givenRepository = ask(
-      Constants.repoOfTemplateText,
+      ConstStrings.repoOfTemplateText,
       required: false,
     );
 
     // If given repository address is empty, use default template.
     // Else use the given.
     _givenRepository.isEmpty
-        ? _repositoryOfTemplate = Constants.defaultTemplate
+        ? _repositoryOfTemplate = ConstStrings.defaultTemplate
         : _repositoryOfTemplate = _givenRepository;
 
     final _givenPath = ask(
-      Constants.pathToInstallText,
+      ConstStrings.pathToInstallText,
       required: false,
     );
 
