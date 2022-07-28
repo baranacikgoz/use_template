@@ -232,13 +232,15 @@ class UseTemplateBase {
       // Didn't use return. Because it's not a critical error.
     }
 
-    try {
-      // Run 'flutter pub get'
-      _runFlutterPubGet(pathToInstall);
-    } catch (e) {
-      printerr('${ConstStrings.couldntRunPubGet} : $e');
-      // Didn't use return. Because it's not a critical error.
-    }
+    _runFlutterPubGet(pathToInstall);
+
+    // try {
+    //   // Run 'flutter pub get'
+    //   _runFlutterPubGet(pathToInstall);
+    // } catch (e) {
+    //   printerr('${ConstStrings.couldntRunPubGet} : $e');
+    //   // Didn't use return. Because it's not a critical error.
+    // }
   }
   /* Exec method ends here. */
 
@@ -276,7 +278,6 @@ class UseTemplateBase {
   }
 
   void _runFlutterPubGet(String path) {
-    'cd $path'.run;
-    'flutter pub get'.run;
+    run('flutter pub get', workingDirectory: path, runInShell: true);
   }
 }
