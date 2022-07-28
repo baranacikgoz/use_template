@@ -22,14 +22,14 @@ class UseTemplateBase {
 
   late final String _oldName;
 
-  /// Executes all necessary operations.
+  /// Executes all the necessary operations.
   /// Uses other methods inside!
   void exec({
     required String newAppNameSnakeCase,
-    required String repositoryOfTemplate,
+    required String addressOfTemplate,
     required String pathToInstall,
   }) {
-    /* Crating directory and clonning operations. */
+    /* Creating directory and clonning operations. */
     try {
       // First, create the directory.
       _createDirectory(pathToInstall);
@@ -39,16 +39,40 @@ class UseTemplateBase {
       return;
     }
 
-    try {
-      // Then, clone the repository in it.
-      _cloneRepository(repositoryOfTemplate, pathToInstall);
-    } catch (e) {
-      printerr('${ConstStrings.couldntCloneRepository} : $e');
-      // Abort.
-      return;
+    // If its a git repository, clone it. Else copy it from given path.
+    if (addressOfTemplate.endsWith('.git')) {
+      try {
+        // Clone the repository in it.
+        _cloneRepository(addressOfTemplate, pathToInstall);
+      } catch (e) {
+        printerr('${ConstStrings.couldntCloneRepository} : $e');
+        // Abort.
+        return;
+      }
+
+      // Once repository is clonned, now check if its a valid Flutter application.
+      if (!_dirContainsPubspec(pathToInstall)) {
+        printerr(ConstStrings.noPubspec);
+        return;
+      }
+    } else {
+      // If not directory contains pubspec.yaml, then it is not a valid Flutter project.
+      if (!_dirContainsPubspec(addressOfTemplate)) {
+        printerr(ConstStrings.noPubspec);
+        return;
+      }
+
+      try {
+        // Copy the project in it.
+        _copyPath(from: addressOfTemplate, to: pathToInstall);
+      } catch (e) {
+        printerr('${ConstStrings.couldntCopyFilesFromTemplate} : $e');
+        // Abort.
+        return;
+      }
     }
 
-    /* Getting old name from pubspec and necessary name of the project. */
+    /* Getting old name from pubspec and doing necessary naming operations of the project. */
     try {
       // Set oldName
       _oldName = _getOldName(pathToInstall);
@@ -232,15 +256,8 @@ class UseTemplateBase {
       // Didn't use return. Because it's not a critical error.
     }
 
+    /* Finally, run 'flutter pub get' */
     _runFlutterPubGet(pathToInstall);
-
-    // try {
-    //   // Run 'flutter pub get'
-    //   _runFlutterPubGet(pathToInstall);
-    // } catch (e) {
-    //   printerr('${ConstStrings.couldntRunPubGet} : $e');
-    //   // Didn't use return. Because it's not a critical error.
-    // }
   }
   /* Exec method ends here. */
 
@@ -252,6 +269,19 @@ class UseTemplateBase {
 
   void _cloneRepository(String repository, String path) {
     'git clone $repository $path'.run;
+  }
+
+  // Copies the files from the folder to the new folder.
+  void _copyPath({required String from, required String to}) {
+    if (Platform.isWindows) {
+      run('xcopy /E /Y $from $to', runInShell: true);
+    } else {
+      run('cp -r $from $to', runInShell: true);
+    }
+  }
+
+  bool _dirContainsPubspec(String path) {
+    return File(join(path, 'pubspec.yaml')).existsSync();
   }
 
   void _removeOldGitFiles(String baseFolderPath) {
