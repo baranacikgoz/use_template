@@ -225,13 +225,22 @@ class UseTemplateBase {
     }
 
     try {
-      /// Remove old git files coming with clonned repository.
+      // Remove old git files coming with clonned repository.
       _removeOldGitFiles(pathToInstall);
     } catch (e) {
       printerr('${ConstStrings.couldntRemoveOldGit} : $e');
       // Didn't use return. Because it's not a critical error.
     }
+
+    try {
+      // Run 'flutter pub get'
+      _runFlutterPubGet(pathToInstall);
+    } catch (e) {
+      printerr('${ConstStrings.couldntRunPubGet} : $e');
+      // Didn't use return. Because it's not a critical error.
+    }
   }
+  /* Exec method ends here. */
 
   void _createDirectory(String path) {
     if (!Directory(path).existsSync()) {
@@ -264,5 +273,10 @@ class UseTemplateBase {
     }
 
     return oldName;
+  }
+
+  void _runFlutterPubGet(String path) {
+    'cd $path'.run;
+    'flutter pub get'.run;
   }
 }
