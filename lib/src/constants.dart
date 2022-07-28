@@ -52,5 +52,6 @@ class ConstStrings {
   static String couldntRemoveOldGit =
       'Could not remove old git files, you have to remove manually!';
 
+  /// Couldn't run 'flutter pub get' text.
   static String couldntRunPubGet = "Could not run 'flutter pub get'. Run it manually!";
 }

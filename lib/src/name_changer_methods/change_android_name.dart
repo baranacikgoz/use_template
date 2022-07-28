@@ -10,21 +10,6 @@ void changeAndroidName({
   required String newNameUpperedFirstChars,
 }) {
   final _basePath = join(baseFolderPath, 'android', 'app');
-
-  // ! Fix it
-  // // Read AndroidManifest.xml and check if it has 'android:label' attribute.
-  // final androidManifest = File(join(_basePath, 'src', 'main', 'AndroidManifest.xml'));
-  // final androidManifestContent = androidManifest.readAsStringSync();
-  // if (androidManifestContent.contains('android:label')) {
-  //   // Change label.
-  //   androidManifest.writeAsStringSync(
-  //     androidManifestContent.replaceAll(
-  //       'android:label="$oldName"',
-  //       'android:label="$newNameUpperedFirstChars"',
-  //     ),
-  //   );
-  // }
-
   final List<File> filesToChange = [
     File(join(_basePath, 'build.gradle')),
     File(join(_basePath, 'src', 'debug', 'AndroidManifest.xml')),
@@ -54,4 +39,18 @@ void changeAndroidName({
       // Ignore.
     }
   }
+
+  //! Double check to make sure 'android label: ....' name is changed.
+  final androidManifest = File(join(_basePath, 'src', 'main', 'AndroidManifest.xml'));
+  final androidManifestLines = androidManifest.readAsLinesSync();
+
+  final newLines = androidManifestLines.map((e) {
+    if (e.contains('android:label')) {
+      return 'android:label="$newNameUpperedFirstChars"';
+    } else {
+      return e;
+    }
+  }).toList();
+
+  androidManifest.writeAsStringSync(newLines.join('\n'));
 }
