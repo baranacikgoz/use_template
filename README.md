@@ -23,11 +23,12 @@ You are asked for three parameters.
 * Directory to install template:
   * Provide a directory to install.
 
-### 1.1 One line code usage (with a template from a git repository)
+### 1. One line code usage
+##### With a template from a git repository
 ````
 > use_template my_new_application https://github.com/baranacikgoz/BloC_repository_pattern_template C:\Users\baran\Software\
 ````
-### 1.2 One line code usage (with a template from your computer)
+##### With a template from your computer
 ````
 > use_template my_new_application C:\path_to_template\flutter_template_app C:\Users\baran\Software\
 ````
