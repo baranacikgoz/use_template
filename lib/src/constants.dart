@@ -1,4 +1,4 @@
-part of '../use_template_base.dart';
+part of '../use_template.dart';
 
 /// Static class to hold constants.
 class ConstStrings {
@@ -6,16 +6,12 @@ class ConstStrings {
   static const wrongNumberOfArguments =
       'You have passed wrong number of arguments. Pass 3(name, repository, path)'
       ' or none if you want to continue with command line interface. \n'
-      r'Example usage: use_template my_new_flutter_app https://github.com/baranacikgoz/BloC_repository_pattern_template C:\Users\baranacikgoz\Desktop\my_new_app_name '
-      'or just run use_template with any arguments to use interactive cli.';
-
-  // /// Default template.
-  // static const defaultTemplate =
-  //     'https://github.com/baranacikgoz/BloC_repository_pattern_template.git';
+      r'Example usage: use_template my_new_flutter_app https://github.com/baranacikgoz/BloC_repository_pattern_template.git C:\Users\baranacikgoz\Desktop\my_new_app_name '
+      '\nor just run use_template with any arguments to use interactive cli.';
 
   /// Default template.
   static const defaultTemplate =
-      'https://github.com/baranacikgoz/use_template_trial_repository.git';
+      'https://github.com/baranacikgoz/BloC_repository_pattern_template.git';
 
   /// Enter new app's name text.
   static const enterAppNameText = 'Enter your new app name: ';
@@ -41,6 +37,9 @@ class ConstStrings {
   /// Couldn't copy files from template text.
   static const couldntCopyFilesFromTemplate =
       'Could not copy files from template folder!';
+
+  /// Couldnt find directory text.
+  static const noDirectory = 'No such directory exists in your computer!';
 
   /// Couldnt find pubspec.yaml text.
   static const noPubspec =

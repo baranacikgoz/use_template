@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:dcli/dcli.dart';
-import 'package:use_template/use_template_base.dart';
+import 'package:use_template/use_template.dart';
 
 void main(List<String> arguments) {
   late final String _newAppName;
@@ -74,14 +74,14 @@ void main(List<String> arguments) {
     // If given path is empty, use current path.
     // Else use the given.
     _givenPath.isEmpty
-        ? _pathToInstall = truepath(_newAppName)
-        : _pathToInstall = truepath('$_givenPath/$_newAppName');
+        ? _pathToInstall = truepath(Directory.current.path)
+        : _pathToInstall = truepath(_givenPath);
   }
 
   // Execute the operations.
-  UseTemplateBase.instance.exec(
+  UseTemplate.instance.exec(
     newAppNameSnakeCase: _newAppName,
     addressOfTemplate: _repositoryOfTemplate,
-    pathToInstall: _pathToInstall,
+    givenPath: _pathToInstall,
   );
 }

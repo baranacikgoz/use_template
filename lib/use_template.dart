@@ -13,26 +13,30 @@ part 'src/constants.dart';
 part 'src/extensions.dart';
 
 /// Repository class to handle operations.
-class UseTemplateBase {
+class UseTemplate {
   /// Private constructor.
-  UseTemplateBase._();
+  UseTemplate._();
 
   /// Singleton instance.
-  static final instance = UseTemplateBase._();
+  static final instance = UseTemplate._();
 
   late final String _oldName;
+
+  late final String _pathToInstall;
 
   /// Executes all the necessary operations.
   /// Uses other methods inside!
   void exec({
     required String newAppNameSnakeCase,
     required String addressOfTemplate,
-    required String pathToInstall,
+    required String givenPath,
   }) {
+    _pathToInstall = Directory(join(givenPath, newAppNameSnakeCase)).path;
+
     /* Creating directory and clonning operations. */
     try {
       // First, create the directory.
-      _createDirectory(pathToInstall);
+      _createDirectory(_pathToInstall);
     } catch (e) {
       printerr('${ConstStrings.couldntCreateDirectory} : $e');
       // Abort.
@@ -40,10 +44,16 @@ class UseTemplateBase {
     }
 
     // If its a git repository, clone it. Else copy it from given path.
-    if (addressOfTemplate.endsWith('.git')) {
+    if (addressOfTemplate.startsWith('https')) {
+      String gitAddress = addressOfTemplate;
+
+      // If address not ends with .git, add it.
+      if (!addressOfTemplate.endsWith('.git')) {
+        gitAddress = '$gitAddress.git';
+      }
       try {
         // Clone the repository in it.
-        _cloneRepository(addressOfTemplate, pathToInstall);
+        _cloneRepository(gitAddress, _pathToInstall);
       } catch (e) {
         printerr('${ConstStrings.couldntCloneRepository} : $e');
         // Abort.
@@ -51,12 +61,18 @@ class UseTemplateBase {
       }
 
       // Once repository is clonned, now check if its a valid Flutter application.
-      if (!_dirContainsPubspec(pathToInstall)) {
+      if (!_dirContainsPubspec(_pathToInstall)) {
         printerr(ConstStrings.noPubspec);
         return;
       }
     } else {
-      // If not directory contains pubspec.yaml, then it is not a valid Flutter project.
+      // If directory not exists, abort.
+      if (!Directory(addressOfTemplate).existsSync()) {
+        printerr('${ConstStrings.noDirectory} : $addressOfTemplate');
+        return;
+      }
+
+      // If directory not contains pubspec.yaml, then it is not a valid Flutter project.
       if (!_dirContainsPubspec(addressOfTemplate)) {
         printerr(ConstStrings.noPubspec);
         return;
@@ -64,7 +80,7 @@ class UseTemplateBase {
 
       try {
         // Copy the project in it.
-        _copyPath(from: addressOfTemplate, to: pathToInstall);
+        _copyPath(from: addressOfTemplate, to: _pathToInstall);
       } catch (e) {
         printerr('${ConstStrings.couldntCopyFilesFromTemplate} : $e');
         // Abort.
@@ -75,7 +91,7 @@ class UseTemplateBase {
     /* Getting old name from pubspec and doing necessary naming operations of the project. */
     try {
       // Set oldName
-      _oldName = _getOldName(pathToInstall);
+      _oldName = _getOldName(_pathToInstall);
     } catch (e) {
       printerr('${ConstStrings.couldntGetOldName} : $e');
       // Abort.
@@ -89,7 +105,7 @@ class UseTemplateBase {
     /* Changing different platform names. */
 
     // If Android path does not exists, do not try to change Android name.
-    if (!Directory(join(pathToInstall, 'android')).existsSync()) {
+    if (!Directory(join(_pathToInstall, 'android')).existsSync()) {
       printerr(
         ConstStrings.couldntFindDir('Android'),
       );
@@ -97,7 +113,7 @@ class UseTemplateBase {
       try {
         // Change Android name.
         changeAndroidName(
-          baseFolderPath: pathToInstall,
+          baseFolderPath: _pathToInstall,
           oldName: _oldName,
           newNameSnakeCase: newAppNameSnakeCase,
           newNameUpperedFirstChars: newNameUpperedFirstChars,
@@ -109,7 +125,7 @@ class UseTemplateBase {
     }
 
     // If iOS path does not exists, do not try to change IOS name.
-    if (!Directory(join(pathToInstall, 'ios')).existsSync()) {
+    if (!Directory(join(_pathToInstall, 'ios')).existsSync()) {
       printerr(
         ConstStrings.couldntFindDir('IOS'),
       );
@@ -117,7 +133,7 @@ class UseTemplateBase {
       try {
         // Change iOS name.
         changeIOSName(
-          baseFolderPath: pathToInstall,
+          baseFolderPath: _pathToInstall,
           oldName: _oldName,
           newNameSnakeCase: newAppNameSnakeCase,
           newNameUpperedFirstChars: newNameUpperedFirstChars,
@@ -129,7 +145,7 @@ class UseTemplateBase {
     }
 
     // If Web path does not exists, do not try to change Web name.
-    if (!Directory(join(pathToInstall, 'web')).existsSync()) {
+    if (!Directory(join(_pathToInstall, 'web')).existsSync()) {
       printerr(
         ConstStrings.couldntFindDir('Web'),
       );
@@ -137,7 +153,7 @@ class UseTemplateBase {
       try {
         // Change web name.
         changeWebName(
-          baseFolderPath: pathToInstall,
+          baseFolderPath: _pathToInstall,
           oldName: _oldName,
           newNameSnakeCase: newAppNameSnakeCase,
           newNameUpperedFirstChars: newNameUpperedFirstChars,
@@ -149,7 +165,7 @@ class UseTemplateBase {
     }
 
     // If Linux path does not exists, do not try to change Linux name.
-    if (!Directory(join(pathToInstall, 'linux')).existsSync()) {
+    if (!Directory(join(_pathToInstall, 'linux')).existsSync()) {
       printerr(
         ConstStrings.couldntFindDir('Linux'),
       );
@@ -157,7 +173,7 @@ class UseTemplateBase {
       try {
         // Change Linux name.
         changeLinuxName(
-          baseFolderPath: pathToInstall,
+          baseFolderPath: _pathToInstall,
           oldName: _oldName,
           newNameSnakeCase: newAppNameSnakeCase,
           newNameUpperedFirstChars: newNameUpperedFirstChars,
@@ -169,7 +185,7 @@ class UseTemplateBase {
     }
 
     // If MacOS path does not exists, do not try to change MacOS name.
-    if (!Directory(join(pathToInstall, 'macos')).existsSync()) {
+    if (!Directory(join(_pathToInstall, 'macos')).existsSync()) {
       printerr(
         ConstStrings.couldntFindDir('MacOS'),
       );
@@ -177,7 +193,7 @@ class UseTemplateBase {
       try {
         // Change MacOS name.
         changeMacOSName(
-          baseFolderPath: pathToInstall,
+          baseFolderPath: _pathToInstall,
           oldName: _oldName,
           newNameSnakeCase: newAppNameSnakeCase,
           newNameUpperedFirstChars: newNameUpperedFirstChars,
@@ -189,7 +205,7 @@ class UseTemplateBase {
     }
 
     // If Windows path does not exists, do not try to change Windows name.
-    if (!Directory(join(pathToInstall, 'windows')).existsSync()) {
+    if (!Directory(join(_pathToInstall, 'windows')).existsSync()) {
       printerr(
         ConstStrings.couldntFindDir('Windows'),
       );
@@ -197,7 +213,7 @@ class UseTemplateBase {
       try {
         // Change Windows name.
         changeWindowsName(
-          baseFolderPath: pathToInstall,
+          baseFolderPath: _pathToInstall,
           oldName: _oldName,
           newNameSnakeCase: newAppNameSnakeCase,
           newNameUpperedFirstChars: newNameUpperedFirstChars,
@@ -212,7 +228,7 @@ class UseTemplateBase {
     try {
       // Change pubspec name.
       changePubspecName(
-        baseFolderPath: pathToInstall,
+        baseFolderPath: _pathToInstall,
         oldName: _oldName,
         newNameSnakeCase: newAppNameSnakeCase,
         newNameUpperedFirstChars: newNameUpperedFirstChars,
@@ -225,7 +241,7 @@ class UseTemplateBase {
     try {
       // Change lib import names.
       changeLibImports(
-        baseFolderPath: pathToInstall,
+        baseFolderPath: _pathToInstall,
         oldName: _oldName,
         newNameSnakeCase: newAppNameSnakeCase,
         newNameUpperedFirstChars: newNameUpperedFirstChars,
@@ -238,7 +254,7 @@ class UseTemplateBase {
     try {
       // Change test import names.
       changeTestImports(
-        baseFolderPath: pathToInstall,
+        baseFolderPath: _pathToInstall,
         oldName: _oldName,
         newNameSnakeCase: newAppNameSnakeCase,
         newNameUpperedFirstChars: newNameUpperedFirstChars,
@@ -250,14 +266,17 @@ class UseTemplateBase {
 
     try {
       // Remove old git files coming with clonned repository.
-      _removeOldGitFiles(pathToInstall);
+      _removeOldGitFiles(_pathToInstall);
     } catch (e) {
       printerr('${ConstStrings.couldntRemoveOldGit} : $e');
       // Didn't use return. Because it's not a critical error.
     }
 
     /* Finally, run 'flutter pub get' */
-    _runFlutterPubGet(pathToInstall);
+    _runFlutterPubGet(_pathToInstall);
+
+    // ignore: avoid_print
+    print('DONE.');
   }
   /* Exec method ends here. */
 
