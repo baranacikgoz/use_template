@@ -1,7 +1,15 @@
 name: use_template
+
 description: A package to allow users use flutter & dart templates.
+
 version: 1.0.0
+
 homepage: https://github.com/baranacikgoz/use_template.git
+
+repository: https://github.com/baranacikgoz/use_template.git
+
+issue_tracker: https://github.com/baranacikgoz/use_template/issues
+
 environment:
   sdk: '>=2.17.1 <3.0.0'
 
