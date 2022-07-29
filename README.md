@@ -33,6 +33,6 @@ You can use interactive interface by passing no arguments.
 
 ![2](https://user-images.githubusercontent.com/52239507/181810387-20af325c-cf43-4c7a-9fd6-5cd1c85a597c.png)  
 
-![3](https://user-images.githubusercontent.com/52239507/181810590-c111d940-34bd-47cb-910e-b3e05b8ec235.png)  
+![3](https://user-images.githubusercontent.com/52239507/181811697-1686cd8c-1e0d-4226-8f12-1e6a896cc90f.png)  
 
 ![4](https://user-images.githubusercontent.com/52239507/181810989-16982e90-4ce0-4231-bd86-393f1ddbab17.png)  
