@@ -2,13 +2,16 @@ name: use_template
 
 description: Allows you to use any Flutter & Dart project as a template with a single line command.
 
-version: 1.0.0
+version: 1.0.1
 
 homepage: https://github.com/baranacikgoz/use_template.git
 
 repository: https://github.com/baranacikgoz/use_template.git
 
 issue_tracker: https://github.com/baranacikgoz/use_template/issues
+
+executables:
+  use_template:
 
 platforms:
   android:
