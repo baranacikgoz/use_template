@@ -1,6 +1,11 @@
 # Use Template
 
-Allows you to use Flutter & Dart templates with a single line command.  
+Allows you to use any Flutter & Dart project as a template with a single line command.  
+It basically clones/copies the project and than changes all imports and platform specific names.
+
+| Android            | iOS                | Linux              | macOS              | Windows            | Web                |
+| ------------------ | ------------------ | ------------------ | ------------------ | ------------------ | ------------------ |
+| :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
 
 ## Installation
 Open terminal and type the following code.
