@@ -29,3 +29,10 @@ You can use interactive interface by passing no arguments.
 ````
 > use_template
 ````
+![1](https://user-images.githubusercontent.com/52239507/181810321-cad98c35-d712-4f3a-bef4-bafd0b4a3636.png)  
+
+![2](https://user-images.githubusercontent.com/52239507/181810387-20af325c-cf43-4c7a-9fd6-5cd1c85a597c.png)  
+
+![3](https://user-images.githubusercontent.com/52239507/181810590-c111d940-34bd-47cb-910e-b3e05b8ec235.png)  
+
+![4](https://user-images.githubusercontent.com/52239507/181810989-16982e90-4ce0-4231-bd86-393f1ddbab17.png)  
