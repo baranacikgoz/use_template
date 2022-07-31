@@ -29,7 +29,8 @@ class ConstStrings {
       'The default is the current path if you leave empty: ';
 
   /// Couldn't create directory text.
-  static const couldntCreateDirectory = 'Could not create directory to clone repository!';
+  static const couldntCreateDirectory =
+      'Could not create directory to clone repository!';
 
   /// Couldn't clone repository text.
   static const couldntCloneRepository = 'Could not clone repository!';
@@ -68,5 +69,6 @@ class ConstStrings {
       'Could not remove old git files, you have to remove manually!';
 
   /// Couldn't run 'flutter pub get' text.
-  static String couldntRunPubGet = "Could not run 'flutter pub get'. Run it manually!";
+  static String couldntRunPubGet =
+      "Could not run 'flutter pub get'. Run it manually!";
 }

@@ -26,7 +26,8 @@ void changeLinuxName({
   );
 
   // Read my_application.cc and replace name.
-  final myApplicationFile = File(join(baseFolderPath, 'linux', 'my_application.cc'));
+  final myApplicationFile =
+      File(join(baseFolderPath, 'linux', 'my_application.cc'));
   final myApplicationFileContent = myApplicationFile.readAsStringSync();
 
   myApplicationFile.writeAsStringSync(

@@ -32,7 +32,9 @@ void changeMacOSName({
   infoPlistFile.writeAsStringSync(lines.join('\n'));
 
   final List<File> filesToChange = [
-    File(join(baseFolderPath, 'macos', 'Runner', 'Configs', 'AppInfo.xcconfig')),
+    File(
+      join(baseFolderPath, 'macos', 'Runner', 'Configs', 'AppInfo.xcconfig'),
+    ),
     File(join(baseFolderPath, 'macos', 'Runner.xcodeproj', 'project.pbxproj')),
     File(
       join(

@@ -18,7 +18,8 @@ void changeWindowsName({
   }
 
   // Read CMakeLists.txt and replace name.
-  final cmakeListsFile = File(join(baseFolderPath, 'windows', 'CMakeLists.txt'));
+  final cmakeListsFile =
+      File(join(baseFolderPath, 'windows', 'CMakeLists.txt'));
   final cmakeListsFileContent = cmakeListsFile.readAsStringSync();
 
   cmakeListsFile.writeAsStringSync(
@@ -26,7 +27,8 @@ void changeWindowsName({
   );
 
   // Read my_application.cc and replace name.
-  final myApplicationFile = File(join(baseFolderPath, 'windows', 'runner', 'main.cpp'));
+  final myApplicationFile =
+      File(join(baseFolderPath, 'windows', 'runner', 'main.cpp'));
   final myApplicationFileContent = myApplicationFile.readAsStringSync();
 
   myApplicationFile.writeAsStringSync(
@@ -34,7 +36,8 @@ void changeWindowsName({
   );
 
   // Read Runner.rc and replace name.
-  final runnerRcFile = File(join(baseFolderPath, 'windows', 'runner', 'Runner.rc'));
+  final runnerRcFile =
+      File(join(baseFolderPath, 'windows', 'runner', 'Runner.rc'));
   final runnerRcFileContent = runnerRcFile.readAsStringSync();
 
   runnerRcFile.writeAsStringSync(

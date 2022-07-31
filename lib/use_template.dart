@@ -99,7 +99,8 @@ class UseTemplate {
     }
     // Split and upper first chars of words.
     List<String> newNameSplittedList = newAppNameSnakeCase.split('_');
-    newNameSplittedList = newNameSplittedList.map((word) => word.capitalize()).toList();
+    newNameSplittedList =
+        newNameSplittedList.map((word) => word.capitalize()).toList();
     final newNameUpperedFirstChars = newNameSplittedList.join(' ');
 
     /* Changing different platform names. */

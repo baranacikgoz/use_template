@@ -9,7 +9,8 @@ void changeIOSName({
   required String newNameSnakeCase,
   required String newNameUpperedFirstChars,
 }) {
-  final infoPlistFile = File(join(baseFolderPath, 'ios', 'Runner', 'Info.plist'));
+  final infoPlistFile =
+      File(join(baseFolderPath, 'ios', 'Runner', 'Info.plist'));
 
   final List<String> lines = infoPlistFile.readAsLinesSync();
   for (int i = 0; i < lines.length; i++) {
