@@ -28,7 +28,8 @@ void main(List<String> arguments) {
 
     _newAppName = arguments[0];
 
-    // Check if arguments[1] obeys regexp for a valid git repository or if it is an existing directory in the computer.
+    // Check if arguments[1] obeys regexp for a valid git repository or if
+    // it is an existing directory in the computer.
     if (!(RegExp('^(https|git)://').hasMatch(arguments[1]) ||
         Directory(arguments[1]).existsSync())) {
       printerr(ConstStrings.repoOfTemplateText);

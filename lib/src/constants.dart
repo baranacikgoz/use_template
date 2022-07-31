@@ -4,7 +4,8 @@ part of '../use_template.dart';
 class ConstStrings {
   /// Tells the user that the number of arguments is wrong.
   static const wrongNumberOfArguments =
-      'You have passed wrong number of arguments. Pass 3(name, repository, path)'
+      'You have passed wrong number of arguments. '
+      'Pass 3(name, repository, path)'
       ' or none if you want to continue with command line interface. \n'
       r'Example usage: use_template my_new_flutter_app https://github.com/baranacikgoz/BloC_repository_pattern_template.git C:\Users\baranacikgoz\Desktop\my_new_app_name '
       '\nor just run use_template with any arguments to use interactive cli.';
