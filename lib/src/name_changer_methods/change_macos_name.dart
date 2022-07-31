@@ -18,7 +18,8 @@ void changeMacOSName({
   }
 
   // Read Info.plist and replace name.
-  final infoPlistFile = File(join(baseFolderPath, 'macos', 'Runner', 'Info.plist'));
+  final infoPlistFile =
+      File(join(baseFolderPath, 'macos', 'Runner', 'Info.plist'));
   final List<String> lines = infoPlistFile.readAsLinesSync();
   for (int i = 0; i < lines.length; i++) {
     if (lines[i].contains('CFBundleDisplayName')) {
